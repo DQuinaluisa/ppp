@@ -5,7 +5,7 @@ require('dotenv').config();
 const  express  = require('express'),
        app = express(),
        path = require('path'),
-       { join } = require('path')
+       { join } = require('path'),
      morgan = require('morgan'),
      multer = require('multer'),
      uuid  = require('uuid/v4'),
@@ -15,6 +15,8 @@ const  express  = require('express'),
       usuarioRutas = require('../routes/usuario.rutas'),  
       imagenesRutas = require('../routes/imagenes.rutas'),
       estudianteRutas = require('../routes/estudiante.rutas'),
+      fileRutas = require('../routes/file.ruta'),
+      alunmoRutas = require('../routes/alumno.rutas'),
       { appConfig, db } = require('../config')
       connetDb(db);
        
@@ -46,7 +48,9 @@ app.use(cors())
 
 app.use('/api', usuarioRutas),
 app.use('/api', imagenesRutas),
-app.use('/api', estudianteRutas)
+app.use('/api', estudianteRutas),
+app.use('/api', fileRutas),
+app.use('/api', alunmoRutas)
 
 
 module.exports = app;

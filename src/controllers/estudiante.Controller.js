@@ -58,7 +58,7 @@ async function eliminarEstudiante (req, res) {
     const img = await estudiante.findByIdAndDelete(id)
 
     if(img) {
-       await fs.unlink(path.resolve(img.imagePath)) 
+       await unlink(path.resolve(img.imagePath)) 
     }
 
     return res.json(img);
@@ -68,7 +68,9 @@ async function editarEstudiante (req, res) {
     const { id } = req.params;
     const body = req.body;
     const img = await estudiante.findByIdAndUpdate(id, body)
-   
+    if(img) {
+        await fs.unlink(path.resolve(img.imagePath)) 
+     }
     return res.json({
         msg: 'Actualizada',
         img

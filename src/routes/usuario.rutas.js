@@ -12,7 +12,7 @@ router.post('/user', [passwordControl.codificarPassword], crearOne);
 router.post('/users', [autentificarControl.autentica ], crearFull);
 router.delete('/user/:id', [autentificarControl.autentica ], eliminar);
 router.put('/user/:id', [autentificarControl.autentica ], updateOne);
-
+ 
 router.post('/login', login);
 
 

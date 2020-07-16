@@ -14,7 +14,7 @@ const imagen = require('../models/imagen.model'),
 async function imagenAdd (req, res) {
     const img = new imagen();
     img.filename = req.body.filename;
-    img.path = '/img/upload/' + req.file.filename;
+    img.path =  req.file.filename;
     img.originalname = req.originalname;
     await img.save();
     console.log(img)
@@ -38,7 +38,9 @@ async function getOneImg (req, res) {
 async function eliminarImg (req, res) {
     const { id } = req.params
     const img = await imagen.findByIdAndDelete(id)
-    await unlink(path.resolve('./src/public/' + img.path ))
+    if(img) {
+        await fs.unlink(path.resolve(img.imagePath)) 
+     }
     return res.json(img);
     
 }
